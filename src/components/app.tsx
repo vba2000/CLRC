@@ -8,6 +8,7 @@ import Header from './header';
 import {useStore} from "../services/Store";
 import { settings } from "../enviroments/mainnet";
 import Login from "../routes/login";
+import Stats from "../routes/stats";
 
 
 const App: FunctionalComponent = () => {
@@ -19,6 +20,7 @@ const App: FunctionalComponent = () => {
             <Router>
                 <Route path="/" component={Home} store={data}/>
                 <Route path="/invest/" component={Profile} store={data}/>
+                <Route path="/stats/" component={Stats} store={data}/>
                 <Route path="/login" component={Login} selectProvider={data.selectProvider}/>
                 <NotFoundPage default />
             </Router>

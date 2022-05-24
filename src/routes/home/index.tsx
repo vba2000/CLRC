@@ -49,7 +49,7 @@ const Home: FunctionalComponent<Props> = ({ store }) => {
             </div>
 
             <div>
-                <InvestForm store={store} isInvest={false} onClick={toInvest}/>
+                <InvestForm store={store} isInvest={false} onClick={toInvest} minInterval={0}/>
             </div>
         </div>
     );

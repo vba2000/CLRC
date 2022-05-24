@@ -32,13 +32,16 @@ export const getUserData = async (nodeUrl: string, user: string, dapp: string, s
 
     const data = res.reduce((acc: any, item: any) => {
         switch (true) {
+            case item.key.includes('clrcInvest') && !item.key.includes(user):
+                acc.stats.push(item.value);
+                break;
             case item.key.includes(user):
+                acc.stats.push(item.value);
                 const data = item.value.split('__');
                 acc.invested = Number(data[4]);
                 acc.totalTime = Number(data[2]) - Number(data[1]);
                 acc.remainingTime = Number(data[2]) - height;
                 acc.remainingTime = acc.remainingTime > 0 ? acc.remainingTime : 0;
-                acc.height = height;
                 acc.notClaimed = Number(data[5]);
                 acc.claimed = Number(data[6]);
                 acc.apy = Number(data[7]);
@@ -69,9 +72,11 @@ export const getUserData = async (nodeUrl: string, user: string, dapp: string, s
         remainingTime: 0,
         amount: 0,
         claimed: 0,
-        notClaimed: 0
-    });
+        notClaimed: 0,
+        stats: []
 
+    });
+    data.height = height;
     let balance = 0;
     let toClaim = 0;
     let forfeit = 0;
